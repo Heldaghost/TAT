@@ -1,5 +1,4 @@
 import Planes.experimentalPlane;
-import com.sun.jdi.InvalidTypeException;
 import models.MilitaryType;
 import Planes.MilitaryPlane;
 import Planes.PassengerPlane;

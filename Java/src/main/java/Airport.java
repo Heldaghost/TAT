@@ -3,6 +3,7 @@ import model.MilitaryPlaneType;
 import plane.MilitaryPlane;
 import plane.PassengerPlane;
 import plane.Plane;
+
 import java.util.*;
 
 
@@ -69,7 +70,7 @@ public class Airport {
 
     }
 
-    public List<ExperimentalPlane> getExperimentalPlanesList() {
+    public List<ExperimentalPlane> getExperimentalPlanes() {
         List<ExperimentalPlane> experimentalPlanesList = new ArrayList<>();
         for (Plane plane : allPlanesList) {
             if (plane instanceof ExperimentalPlane) {

@@ -39,6 +39,18 @@ public class AirportTest {
     }
 
     @Test
+    public void testGetBomberMilitaryPlanes() {
+        Airport airport = new Airport(planes);
+        Assert.assertTrue(airport.getBomberMilitaryPlanes().size() > 0);
+    }
+
+    @Test
+    public void testGetExperimentalPlanes() {
+        Airport airport = new Airport(planes);
+        Assert.assertTrue(airport.getExperimentalPlanes().size() > 0);
+    }
+
+    @Test
     public void testGetPassengerPlaneWithMaxCapacity() {
         Airport airport = new Airport(planes);
         Assert.assertTrue(airport.getPassengerPlaneWithMaxPassengersCapacity().equals(planeWithMaxPassengerCapacity));
@@ -59,6 +71,13 @@ public class AirportTest {
     }
 
     @Test
+    public void sortPlanesByMaxDistance() {
+        Airport airport = new Airport(planes);
+        airport.sortByMaxDistance();
+        Assert.assertTrue(airport.getAllPlanesList().get(0).getMaxFlightDistance() <= airport.getAllPlanesList().get(1).getMaxFlightDistance());
+    }
+
+    @Test
     public void hasAtLeastOneBomberInMilitaryPlanesListTest() {
         Airport airport = new Airport(planes);
         Assert.assertTrue(airport.getBomberMilitaryPlanes().size() > 0);
@@ -68,6 +87,6 @@ public class AirportTest {
     @Test
     public void experimentalPlanesHasClassificationLevelHigherThanUnclassifiedTest(){
         Airport airport = new Airport(planes);
-        Assert.assertTrue(airport.getExperimentalPlanesList().get(0).getClassificationLevel() != ClassificationLevel.UNCLASSIFIED);
+        Assert.assertTrue(airport.getExperimentalPlanes().get(0).getClassificationLevel() != ClassificationLevel.UNCLASSIFIED);
     }
 }

@@ -52,6 +52,13 @@ public class AirportTest {
     }
 
     @Test
+    public void sortPlanesByMaxSpeedTest() {
+        Airport airport = new Airport(planes);
+        airport.sortByMaxSpeed();
+        Assert.assertTrue(airport.getAllPlanesList().get(0).getMaxSpeed() <= airport.getAllPlanesList().get(1).getMaxSpeed());
+    }
+
+    @Test
     public void hasAtLeastOneBomberInMilitaryPlanesListTest() {
         Airport airport = new Airport(planes);
         Assert.assertTrue(airport.getBomberMilitaryPlanes().size() > 0);

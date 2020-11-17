@@ -3,8 +3,6 @@ import model.MilitaryPlaneType;
 import plane.MilitaryPlane;
 import plane.PassengerPlane;
 import plane.Plane;
-
-
 import java.util.*;
 
 
@@ -83,8 +81,8 @@ public class Airport {
 
     public Airport sortByMaxDistance() {
         Collections.sort(allPlanesList, new Comparator<Plane>() {
-            public int compare(Plane FirstPlane, Plane SecondPlane) {
-                return FirstPlane.getMaxFlightDistance() - SecondPlane.getMaxFlightDistance();
+            public int compare(Plane FirstPlane, Plane secondPlane) {
+                return FirstPlane.getMaxFlightDistance() - secondPlane.getMaxFlightDistance();
             }
         });
         return this;

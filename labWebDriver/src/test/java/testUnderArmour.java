@@ -23,12 +23,13 @@ import org.testng.annotations.Test;
         @Test
         public void addToWishListTest(){
             driver.get("https://www.underarmour.com/en-us/p/bottoms/mens-project-rock-unstoppable-pants/1357202.html");
-
+            WebElement closeModalButton = driver.findElement(By.xpath("//img[@alt='BY']"));
+            closeModalButton.click();
             WebElement addToWishListButton = waitForElementLocatedBy(driver,By.xpath("//button[@class='b-product_name-fav_defultButton add-to-wish-list product']"));
             addToWishListButton.click();
             WebElement goToWishListButton = driver.findElement(By.xpath("//div[@class='b-header-wishlist b-wishlist']"));
             goToWishListButton.click();
-            Assert.assertEquals(waitForElementLocatedBy(driver,By.xpath("//a[@href='/en-us/p/bottoms/mens-project-rock-unstoppable-pants/194512003878.html'][@class='b-tile-name']")).getText(), expectedResult);
+                Assert.assertEquals(waitForElementLocatedBy(driver,By.xpath("//a[@href='/en-us/p/bottoms/mens-project-rock-unstoppable-pants/194512005476.html'][@class='b-tile-name']")).getText(), expectedResult);
         }
 
         @AfterMethod(alwaysRun = true)

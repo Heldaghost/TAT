@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
 import page.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class UnderArmourTest {
     public static WebDriver driver;
     public static PantsPage pantsPage;
     public static WishListPage wishListPage;
+    public static CartPage cartPage;
 
     @BeforeTest
     public void browserSetup() {
@@ -30,7 +32,27 @@ public class UnderArmourTest {
                 .addToWishList()
                 .openWishListPage();
         String expectedResult = wishListPage.getTextFromCard();
-        Assert.assertEquals(expectedResult,"Men's Project Rock Unstoppable Pants");
+        Assert.assertEquals(expectedResult,"Boys' UA Showdown Pants");
+    }
+
+    @Test
+    public void addManyProductsToCart(){
+        pantsPage = new PantsPage(driver);
+        cartPage = pantsPage.openPage()
+                .closeModal()
+                .selectSize()
+                .closeBanner()
+                .openQuantityList()
+                .selectQuantity()
+                .addToBag()
+                .goToCartPage();
+        Assert.assertEquals(cartPage.getQuantityOfProduct(),"10");
+
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void browserTearDown() {
+        driver.manage().deleteAllCookies();
     }
 
     @AfterTest

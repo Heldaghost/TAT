@@ -35,7 +35,6 @@ public class UnderArmourTest {
     public void addToWishList() {
         pantsPage = new PantsPage(driver);
         wishListPage = pantsPage.openPage()
-                .closeModal()
                 .addToWishList()
                 .openWishListPage();
         String expectedResult = wishListPage.getTextFromCard();
@@ -46,7 +45,6 @@ public class UnderArmourTest {
     public void addManyProductsToCart(){
         pantsPage = new PantsPage(driver);
         cartPage = pantsPage.openPage()
-                .closeModal()
                 .selectSize()
                 .closeBanner()
                 .openQuantityList()

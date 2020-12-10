@@ -1,4 +1,5 @@
 package page;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +20,7 @@ public class CartPage {
     }
 
     public String getQuantityOfProduct(){
-        
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-name=\"Boys' UA Showdown Pants\"]//option[@selected]")));
         return quantityOfProductInCart.getText();
     }
 }

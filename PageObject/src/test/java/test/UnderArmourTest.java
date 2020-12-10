@@ -36,7 +36,6 @@ public class UnderArmourTest {
         cartPage = pantsPage.addToBag()
                 .goToCartPage();
         Assert.assertEquals(cartPage.getQuantityOfProduct(),"10");
-
     }
 
     @Test

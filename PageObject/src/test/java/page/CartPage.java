@@ -20,7 +20,7 @@ public class CartPage {
     }
 
     public String getQuantityOfProduct(){
-        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-name=\"Boys' UA Showdown Pants\"]")));
+ 
         return quantityOfProductInCart.getText();
     }
 }

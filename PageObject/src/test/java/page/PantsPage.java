@@ -71,12 +71,13 @@ public class PantsPage {
     }
 
     public PantsPage openQuantityList(){
-        new WebDriverWait(driver,3).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//select[@id='quantity-1']")));
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//a[@data-size-attr=8]")));
         quantityList.click();
         return this;
     }
 
     public PantsPage selectQuantity(){
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//a[@data-size-attr=8]")));
         selectQuantityButton.click();
         return this;
     }

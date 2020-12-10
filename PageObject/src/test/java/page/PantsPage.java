@@ -71,22 +71,25 @@ public class PantsPage {
     }
 
     public PantsPage openQuantityList(){
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(quantityList));
         quantityList.click();
         return this;
     }
 
     public PantsPage selectQuantity() {
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(selectQuantityButton));
         selectQuantityButton.click();
         return this;
     }
 
     public PantsPage addToBag(){
-        new WebDriverWait(driver,5);
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(addToBagButton));
         addToBagButton.click();
         return this;
     }
 
     public CartPage goToCartPage(){
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(goToCartButton));
         goToCartButton.click();
         return new CartPage(driver);
     }

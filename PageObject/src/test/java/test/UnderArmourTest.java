@@ -31,7 +31,6 @@ public class UnderArmourTest {
         pantsPage.openPage()
                 .closeModal()
                 .closeBanner()
-                .selectSize()
                 .openQuantityList()
                 .selectQuantity();
         cartPage = pantsPage.addToBag()

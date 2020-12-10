@@ -3,7 +3,6 @@ package test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -27,29 +26,28 @@ public class UnderArmourTest {
     }
 
     @Test
+    public void addManyProductsToCart() {
+        pantsPage = new PantsPage(driver);
+        pantsPage.openPage()
+                .closeModal()
+                .closeBanner()
+                .selectSize()
+                .openQuantityList()
+                .selectQuantity();
+        cartPage = pantsPage.addToBag()
+                .goToCartPage();
+        Assert.assertEquals(cartPage.getQuantityOfProduct(),"10");
+
+    }
+
+    @Test
     public void addToWishList() {
         pantsPage = new PantsPage(driver);
         wishListPage = pantsPage.openPage()
                 .closeModal()
                 .addToWishList()
                 .openWishListPage();
-        String expectedResult = wishListPage.getTextFromCard();
-        Assert.assertEquals(expectedResult,"Boys' UA Showdown Pants");
-    }
-
-    @Test
-    public void addManyProductsToCart(){
-        pantsPage = new PantsPage(driver);
-        cartPage = pantsPage.openPage()
-                .closeModal()
-                .selectSize()
-                .closeBanner()
-                .openQuantityList()
-                .selectQuantity()
-                .addToBag()
-                .goToCartPage();
-        Assert.assertEquals(cartPage.getQuantityOfProduct(),"10");
-
+        Assert.assertEquals(wishListPage.getTextFromCard(),"Boys' UA Showdown Pants");
     }
 
     @AfterMethod(alwaysRun = true)

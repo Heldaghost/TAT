@@ -10,7 +10,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import page.*;
-import property.*;
 
 import java.util.List;
 
@@ -22,12 +21,8 @@ public class UnderArmourTest {
 
     @BeforeTest
     public void browserSetup() {
-        System.setProperty("webdriver.chrome.driver", ConfigurationProperties.getProperty("chromedriver"));
-
-        ChromeOptions options = new ChromeOptions();
-
-
-        driver = new ChromeDriver(options);
+        System.setProperty("webdriver.chrome.driver","D:\\epam\\chromedriver.exe");
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
@@ -35,6 +30,7 @@ public class UnderArmourTest {
     public void addToWishList() {
         pantsPage = new PantsPage(driver);
         wishListPage = pantsPage.openPage()
+                .closeModal()
                 .addToWishList()
                 .openWishListPage();
         String expectedResult = wishListPage.getTextFromCard();
@@ -45,6 +41,7 @@ public class UnderArmourTest {
     public void addManyProductsToCart(){
         pantsPage = new PantsPage(driver);
         cartPage = pantsPage.openPage()
+                .closeModal()
                 .selectSize()
                 .closeBanner()
                 .openQuantityList()

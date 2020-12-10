@@ -20,7 +20,6 @@ public class WishListPage {
     }
 
     public String getTextFromCard() {
-        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(pantsCardInWishList));
         return pantsCardInWishList.getText();
     }
 }

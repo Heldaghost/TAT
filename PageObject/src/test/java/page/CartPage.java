@@ -19,7 +19,7 @@ public class CartPage {
     }
 
     public String getQuantityOfProduct(){
-        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(quantityOfProductInCart));
+        
         return quantityOfProductInCart.getText();
     }
 }

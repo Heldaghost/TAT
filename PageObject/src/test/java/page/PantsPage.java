@@ -81,6 +81,7 @@ public class PantsPage {
     }
 
     public PantsPage addToBag(){
+        new WebDriverWait(driver,5);
         addToBagButton.click();
         return this;
     }

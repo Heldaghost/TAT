@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WishListPage {
+    private final Logger logger = LogManager.getRootLogger();
+    private final String BASE_URL = "https://www.underarmour.com/en-us/cart";
     private WebDriver driver;
 
     @FindBy(xpath = "//a[@class='b-tile-name']")

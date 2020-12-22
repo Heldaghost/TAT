@@ -22,7 +22,7 @@ public class UnderArmourTest {
     public void browserSetup() {
         System.setProperty("webdriver.chrome.driver","D:\\epam\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver.manage().window();
     }
 
     @Test

@@ -33,12 +33,6 @@ public class CartPage extends AbstractPage implements IWaitable{
     @FindBy(xpath = "//a[@data-cmp='editBasketProduct']")
     private WebElement editButton;
 
-    @FindBy(xpath = "//div[@class='g-email-pop-modal-close g-modal-close-button']")
-    private WebElement closeBannerButton;
-
-    @FindBy(xpath = "//img[@alt='BY']")
-    private WebElement closeModalButton;
-
     @FindBy(xpath ="//span[@class='text-right shipping-cost bfx-price bfx-total-shipping']")
     private WebElement shippingCostField;
 
@@ -51,6 +45,7 @@ public class CartPage extends AbstractPage implements IWaitable{
     @FindBy(xpath = "//a[@class='b-lineitem_itemname bfx-product-name']")
     private WebElement productNameField;
 
+    private final By closeBannerButtonLocator = By.xpath("//div[@class='g-email-pop-modal-close g-modal-close-button']");
     private final By promoCodeErrorMessageLocator = By.xpath("//*[@id='invalidCouponCode']");
     private final By greyColorButtonLocator = By.xpath("//a[@alt='Gray']");
     private final By addToBagButtonLocator = By.xpath("//button[@data-addto-bag]");
@@ -60,11 +55,6 @@ public class CartPage extends AbstractPage implements IWaitable{
         PageFactory.initElements(this.driver,this);
     }
 
-    public CartPage closeModal() {
-        closeModalButton.click();
-        return this;
-    }
-
     @Override
     public CartPage openPage() {
         driver.navigate().to(BASE_URL);
@@ -72,7 +62,8 @@ public class CartPage extends AbstractPage implements IWaitable{
     }
 
     public CartPage closeBanner() {
-        closeBannerButton.click();
+        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(closeBannerButtonLocator))
+                .click();
         return this;
     }
 
@@ -94,14 +85,14 @@ public class CartPage extends AbstractPage implements IWaitable{
         changeColorToGrayButton.click();
         waitForElementLocatedBy(driver,addToBagButtonLocator)
                 .click();
+        logger.info("Color has been changed!");
         return this;
     }
 
 
-    public String getColorOfProductInCart(){
-        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS)
+    public boolean isColorGray(){
+        return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.textToBePresentInElement(colorNameField, "Color: Gray"));
-        return colorNameField.getText();
     }
 
     public String getShippingCost(){
@@ -116,6 +107,7 @@ public class CartPage extends AbstractPage implements IWaitable{
     public CartPage enterPromoCode(){
         inputPromoCode.sendKeys("testdata.promocode");
         applyPromoCodeButton.click();
+        logger.info("Promocode entered!");
         return this;
     }
 
@@ -133,5 +125,4 @@ public class CartPage extends AbstractPage implements IWaitable{
             .withTimeout(30,SECONDS)
             .pollingEvery(5, SECONDS)
             .ignoring(NoSuchElementException.class);
-
 }

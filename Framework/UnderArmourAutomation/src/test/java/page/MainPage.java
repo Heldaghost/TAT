@@ -7,10 +7,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class UserAccessPage extends AbstractPage implements IWaitable {
+public class MainPage extends AbstractPage implements IWaitable {
     private final Logger logger = LogManager.getRootLogger();
     private final String BASE_URL = "https://www.underarmour.com/en-us/";
 
@@ -29,42 +28,44 @@ public class UserAccessPage extends AbstractPage implements IWaitable {
     private By registerButtonLocator = By.xpath("//button[@name='dwfrm_profile_create']");
     private By logInButtonLocator = By.xpath("//button[@class='btn btn-block g-button_primary--black g-button_base b-checkout-login_button js-login-button']");
 
-    public UserAccessPage(WebDriver driver) {
+    public MainPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver,this);
     }
 
     @Override
-    public UserAccessPage openPage() {
+    public MainPage openPage() {
         driver.navigate().to(BASE_URL);
         return this;
     }
 
-    public UserAccessPage changeCountry(){
+    public MainPage changeSiteCountry(){
         changeCountryButton.click();
+        logger.info("Country has been changed");
         return this;
     }
 
-    public UserAccessPage openRegisterModalWindow(){
+    public MainPage openRegisterModalWindow(){
         waitForElementLocatedBy(driver,buttonRegisterLocator)
                 .click();
+        logger.info("Register window opened");
         return this;
     }
 
-    public UserAccessPage openLogInModalWindow(){
+    public MainPage openLogInModalWindow(){
         waitForElementLocatedBy(driver,buttonLogInLocator)
                 .click();
         return this;
     }
 
-    public UserAccessPage registerUser(User user){
+    public MainPage registerUser(User user){
         waitForElementLocatedBy(driver,inputRegistrationEmailLocator)
                 .sendKeys(user.getEmail());
         waitForElementLocatedBy(driver,inputRegistrationPasswordLocator)
                 .sendKeys(user.getPassword());
         waitForElementLocatedBy(driver,registerButtonLocator)
                 .click();
-        logger.info("Login performed");
+        logger.info("Registration performed");
         return this;
     }
 
@@ -73,7 +74,7 @@ public class UserAccessPage extends AbstractPage implements IWaitable {
                     .getText();
     }
 
-    public UserAccessPage logIn(User user){
+    public MainPage logIn(User user){
         waitForElementLocatedBy(driver,inputLogInEmailLocator)
                 .sendKeys(user.getEmail());
         waitForElementLocatedBy(driver,inputLogInPasswordLocator)

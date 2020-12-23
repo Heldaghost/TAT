@@ -1,8 +1,6 @@
 package test;
 import model.User;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import util.AssertAccumulator;
 import page.*;
 import util.UserCreator;
 
@@ -13,9 +11,9 @@ public class UserAccessTests extends CommonConditions {
     @Test
     public void registerExistentUserTest(){
         User testUser = UserCreator.withCredentialsFromProperty();
-        String expectedErrorMessage = new UserAccessPage(driver)
+        String expectedErrorMessage = new MainPage(driver)
                 .openPage()
-                .changeCountry()
+                .changeSiteCountry()
                 .openRegisterModalWindow()
                 .registerUser(testUser)
                 .getRegisterMessage();
@@ -25,13 +23,13 @@ public class UserAccessTests extends CommonConditions {
     @Test
     public void canLogInTest() {
         User testUser = UserCreator.withCredentialsFromProperty();
-        ProfilePage profilePage = new UserAccessPage(driver)
+        String expectedUserEmail = new MainPage(driver)
                 .openPage()
-                .changeCountry()
+                .changeSiteCountry()
                 .openLogInModalWindow()
                 .logIn(testUser)
-                .goToProfilePage();
-        String expectedUserEmail = profilePage.getUserEmail();
+                .goToProfilePage()
+                .getUserEmail();
         assertThat(expectedUserEmail,is(equalTo(testUser.getEmail())));
     }
 }

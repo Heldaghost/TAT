@@ -9,8 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
+
 public class ProductPage extends AbstractPage implements IWaitable {
     private static final String PANTS_PAGE_URL = "https://www.underarmour.com/en-us/p/bottoms/boys-ua-showdown-pants/193444360950.html";
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath = "//button[@class='close']")
     private WebElement closeBannerButton;
@@ -51,7 +54,7 @@ public class ProductPage extends AbstractPage implements IWaitable {
         return this;
     }
 
-    public ProductPage changeCountry(){
+    public ProductPage changeSiteCountry(){
         changeCountryButton.click();
         openPage();
         return this;
@@ -64,6 +67,7 @@ public class ProductPage extends AbstractPage implements IWaitable {
     }
     public ProductPage addToWishList() {
         addToWishListButton.click();
+        logger.info("Product added to wish list");
         return this;
     }
 
@@ -77,23 +81,22 @@ public class ProductPage extends AbstractPage implements IWaitable {
         String buttonSizeLocator = String.format("//a[@data-size-attr=%s]",neededSize);
         new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(buttonSizeLocator)))
                 .click();
-        return this;
-    }
-
-    public ProductPage openQuantityList(){
-        waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
-        quantityList.click();
+        logger.info("Size selected");
         return this;
     }
 
     public ProductPage selectQuantity() {
+        waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
+        quantityList.click();
         selectQuantityButton.click();
+        logger.info("Quantity selected!");
         return this;
     }
 
     public ProductPage addToBag(){
         waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
         addToBagButton.click();
+        logger.info("Product added to bag");
         return this;
     }
 

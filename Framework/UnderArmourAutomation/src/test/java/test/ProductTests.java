@@ -10,38 +10,37 @@ public class ProductTests extends CommonConditions {
 
     @Test
     public void addProductToCart() {
-        CartPage cartPage = new ProductPage(driver)
+        String expectedProduct = new ProductPage(driver)
                 .openPage()
                 .closeAdds()
                 .selectSize(8)
                 .addToBag()
-                .goToCartPage();
-        String expectedProduct = cartPage.getNameOfProductInCart();
+                .goToCartPage()
+                .getNameOfProductInCart();
         Assert.assertEquals(expectedProduct,"Boys' UA Showdown Pants");
     }
 
    @Test
     public void addManyProductsToCart() {
-        CartPage cartPage = new ProductPage(driver)
+       String expectedQuantity = new ProductPage(driver)
                 .openPage()
                 .closeAdds()
                 .selectSize(8)
-                .openQuantityList()
                 .selectQuantity()
                 .addToBag()
-                .goToCartPage();
-        String expectedQuantity = cartPage.getQuantityOfProduct();
+                .goToCartPage()
+                .getQuantityOfProduct();
         Assert.assertEquals(expectedQuantity,"10");
     }
 
     @Test
     public void addToWishList() {
-        WishlistPage wishListPage = new ProductPage(driver)
+        String expectedName = new ProductPage(driver)
                 .openPage()
                 .closeAdds()
                 .addToWishList()
-                .openWishListPage();
-        String expectedName  = wishListPage.getTextFromCard();
+                .openWishListPage()
+                .getTextFromCard();
         Assert.assertEquals(expectedName,"Boys' UA Showdown Pants");
     }
 
@@ -55,20 +54,17 @@ public class ProductTests extends CommonConditions {
 
     @Test
     public void changeColorOfProductInCart() {
-        CartPage cartPage = new ProductPage(driver)
+        boolean isColorGray = new ProductPage(driver)
                 .openPage()
                 .closeAdds()
                 .selectSize(8)
                 .addToBag()
-                .goToCartPage();
-        String expectedColor = cartPage
+                .goToCartPage()
                 .closeBanner()
                 .changeColorOfProductInCart()
-                .getColorOfProductInCart();
-        assertThat(expectedColor, is(equalTo("Color: Gray")));
-
+                .isColorGray();
+        assertThat(isColorGray, is(equalTo(true)));
     }
-
 
     @Test
     public void freeShippingTest()
@@ -76,7 +72,7 @@ public class ProductTests extends CommonConditions {
         AssertAccumulator assertAccumulator = new AssertAccumulator();
         CartPage cartPage = new ProductPage(driver)
                 .openPage()
-                .changeCountry()
+                .changeSiteCountry()
                 .selectSize(8)
                 .addToBag()
                 .goToCartPage();
@@ -87,12 +83,9 @@ public class ProductTests extends CommonConditions {
         assertAccumulator.release();
     }
 
-
-
     @Test
     public void colorFilterTest() throws InterruptedException {
         String expectedColorOfProduct = new ProductListPage(driver).openPage()
-                .closeModal()
                 .filterByPinkColor()
                 .getColorOfFilteredProduct();
         assertThat(expectedColorOfProduct,is(equalTo("Men's Project Rock Charged Cotton® Fleece Shorts, Pink")));
@@ -100,13 +93,13 @@ public class ProductTests extends CommonConditions {
 
     @Test
     public void enterWrongPromoTest(){
-        CartPage cartPage = new ProductPage(driver)
+        String expectedErrorPromoCodeMessage = new ProductPage(driver)
                 .openPage()
-                .changeCountry()
+                .changeSiteCountry()
                 .selectSize(8)
                 .addToBag()
-                .goToCartPage();
-        String expectedErrorPromoCodeMessage = cartPage.enterPromoCode()
+                .goToCartPage()
+                .enterPromoCode()
                 .getPromoCodeErrorMessage();
         assertThat(expectedErrorPromoCodeMessage,is(equalTo("Promo code cannot be added to your bag")));
     }

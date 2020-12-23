@@ -35,10 +35,6 @@ public class ProductListPage extends AbstractPage {
     @Override
     public ProductListPage openPage() {
         driver.navigate().to(BASE_URL);
-        return this;
-    }
-
-    public ProductListPage closeModal() {
         closeModalButton.click();
         return this;
     }
@@ -48,6 +44,7 @@ public class ProductListPage extends AbstractPage {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();"
                 ,colorToogle);
         new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(pinkColorButtonLocator)).click();
+        logger.info("Products were filtered");
         return this;
     }
 

@@ -72,7 +72,7 @@ public class ProductPage extends AbstractPage implements IWaitable {
     }
 
     public WishlistPage openWishListPage() {
-        waitForElementLocatedBy(driver,By.xpath("//div[@class='js-whislist-icon product-added b-product_name-fav_selectButton']"));
+        WebElement selectedAddedToWishListButton =  waitForElementLocatedBy(driver,By.xpath("//div[@class='js-whislist-icon product-added b-product_name-fav_selectButton']"));
         goToWishListButton.click();
         return new WishlistPage(driver);
     }
@@ -86,7 +86,7 @@ public class ProductPage extends AbstractPage implements IWaitable {
     }
 
     public ProductPage selectQuantity() {
-        waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
+        WebElement activeSizeButton = waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
         quantityList.click();
         selectQuantityButton.click();
         logger.info("Quantity selected!");
@@ -94,14 +94,14 @@ public class ProductPage extends AbstractPage implements IWaitable {
     }
 
     public ProductPage addToBag(){
-        waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
+        WebElement activeSizeButton = waitForElementLocatedBy(driver,By.xpath("//a[@class='js-size-select selectable m-active selected']"));
         addToBagButton.click();
         logger.info("Product added to bag");
         return this;
     }
 
     public CartPage goToCartPage(){
-        waitForElementLocatedBy(driver,By.xpath("//span[@class='b-header_minicart-icon']/span[@style='display: block;']"));
+        WebElement notPourCartButton = waitForElementLocatedBy(driver,By.xpath("//span[@class='b-header_minicart-icon']/span[@style='display: block;']"));
         goToCartButton.click();
         return new CartPage(driver);
     }

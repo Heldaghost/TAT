@@ -7,19 +7,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverSingleton {
     private static WebDriver driver;
-
-
     private DriverSingleton(){}
 
     public static WebDriver getDriver(){
         if (null == driver){
-            if ("firefox".equals(System.getProperty("browser"))) {
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
+            switch (System.getProperty("browser")){
+                case "firefox": {
+                    WebDriverManager.firefoxdriver().setup();
+                    driver = new FirefoxDriver();
+                }
+                default: {
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions options = new ChromeOptions();
+                    driver = new ChromeDriver(options);
+                }
             }
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         }
         return driver;

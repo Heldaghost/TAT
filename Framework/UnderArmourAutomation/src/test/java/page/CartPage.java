@@ -30,9 +30,6 @@ public class CartPage extends AbstractPage implements IWaitable{
     @FindBy(xpath = "//div[@class='b-cart_empty_basket_outer']/p")
     private WebElement emptyCartMessage;
 
-    @FindBy(xpath = "//a[@data-cmp='editBasketProduct']")
-    private WebElement editButton;
-
     @FindBy(xpath ="//span[@class='text-right shipping-cost bfx-price bfx-total-shipping']")
     private WebElement shippingCostField;
 
@@ -49,6 +46,8 @@ public class CartPage extends AbstractPage implements IWaitable{
     private final By promoCodeErrorMessageLocator = By.xpath("//*[@id='invalidCouponCode']");
     private final By greyColorButtonLocator = By.xpath("//a[@alt='Gray']");
     private final By addToBagButtonLocator = By.xpath("//button[@data-addto-bag]");
+    private final By editButtonLocator = By.xpath("//a[@data-cmp='editBasketProduct']");
+
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -76,7 +75,7 @@ public class CartPage extends AbstractPage implements IWaitable{
     }
 
     public CartPage changeColorOfProductInCart(){
-        editButton.click();
+        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(editButtonLocator)).click();
         WebElement changeColorToGrayButton = wait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver driver) {
                 return driver.findElement(greyColorButtonLocator);

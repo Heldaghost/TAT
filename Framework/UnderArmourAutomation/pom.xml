@@ -87,16 +87,10 @@
                 <systemProperties>
                     <property>
                         <name>allure.results.directory</name>
-                        <value>${project.build.directory}/allure-results</value>
+                        <value>C:\data\slave\workspace\Framework\Framework\UnderArmourAutomation\target\allure-results</value>
                     </property>
                 </systemProperties>
-            </configuration>
-                 <systemProperties>
-                          <property> 
-                                   <name>allure.results.directory</name> 
-                                   <value>C:\data\slave\workspace\Framework\Framework\UnderArmourAutomation\target\allure-results</value> 
-                          </property> 
-                 </systemProperties>
+            </configuration>   
             <dependencies>
                 <dependency>
                     <groupId>org.aspectj</groupId>
